@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+            <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -18,55 +18,49 @@
             background: rgba(0, 26, 51, 0.95); padding: 50px; border-radius: 25px;
             border: 2px solid #f9d74c; text-align: center;
             box-shadow: 0 0 30px rgba(249, 215, 76, 0.4);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); z-index: 10;
         }
-        input { padding: 15px; width: 280px; border: 1px solid #f9d74c; background: rgba(255,255,255,0.05); color: #fff; border-radius: 50px; text-align: center; outline: none; }
-        button { margin-top: 20px; padding: 12px 40px; background: #f9d74c; color: #001a33; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-
-        /* --- NAVİGASYON (SEKMELER) --- */
-        nav {
-            display: none; /* Giriş yapana kadar gizli */
-            justify-content: center;
-            background: rgba(0, 20, 40, 0.9);
-            padding: 15px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #f9d74c;
+        input { 
+            padding: 15px; width: 280px; border: 1px solid #f9d74c; 
+            background: rgba(255,255,255,0.05); color: #fff; border-radius: 50px;
+            text-align: center; font-size: 1.1rem; outline: none; transition: 0.3s;
         }
-        nav span {
-            margin: 0 20px;
-            font-size: 1.4rem;
-            cursor: pointer;
-            transition: 0.3s;
-            opacity: 0.7;
+        button { 
+            margin-top: 20px; padding: 12px 40px; background: #f9d74c; 
+            color: #001a33; border: none; border-radius: 50px;
+            font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.3s;
         }
-        nav span:hover, nav span.active {
-            opacity: 1;
-            text-shadow: 0 0 10px #f9d74c;
-            border-bottom: 2px solid #f9d74c;
+        .bg-heart { position: absolute; color: rgba(0, 150, 255, 0.4); pointer-events: none; animation: float 8s infinite linear; }
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- İÇERİK ALANLARI --- */
-        #main-content { display: none; padding: 20px; max-width: 900px; margin: 20px auto; }
-        .tab-content { display: none; animation: fadeIn 1s forwards; }
-        .tab-content.active { display: block; }
-
+        /* --- İÇERİK --- */
+        #main-content { display: none; padding: 20px; max-width: 900px; margin: 40px auto; animation: fadeIn 2s forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .mektup-kagit { background: #002d5a; padding: 40px; border-radius: 15px; border: 1px solid #f9d74c; box-shadow: 0 0 40px rgba(0,0,0,0.5); }
-        h1 { font-size: 2.6rem; text-align: center; border-bottom: 1px solid #f9d74c; padding-bottom: 15px; }
-        .mesaj { line-height: 1.8; font-size: 1.35rem; text-align: justify; }
+        .mektup-kagit { 
+            background: #002d5a; padding: 40px; border-radius: 15px; 
+            border: 1px solid #f9d74c; box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
+        h1 { font-size: 2.6rem; text-align: center; margin-bottom: 25px; border-bottom: 1px solid #f9d74c; padding-bottom: 15px; }
+        .mesaj { line-height: 1.8; font-size: 1.35rem; text-align: justify; margin-bottom: 40px; }
 
-        /* GALERİ TASARIMI */
-        .resim-alani { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; }
+        .resim-alani { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         .foto-kart { background: #001a33; padding: 10px; border-radius: 10px; border: 1px solid rgba(249, 215, 76, 0.3); text-align: center; }
-        .foto-kart img { width: 100%; border-radius: 8px; display: block; transition: 0.5s; cursor: pointer; }
-        .foto-kart img:hover { transform: scale(1.05); }
-        .foto-kart p { font-size: 1.1rem; color: #88aacc; margin-top: 10px; font-style: italic; }
+        .foto-kart img { width: 100%; border-radius: 8px; display: block; }
+        .foto-kart p { font-size: 1rem; color: #88aacc; margin-top: 10px; font-style: italic; }
 
+        .bottom-area { text-align: center; border-top: 1px solid #f9d74c; margin-top: 30px; padding-top: 25px; }
+        .gallery-btn { background: none; color: #f9d74c; border: 1px solid #f9d74c; padding: 10px 25px; border-radius: 30px; cursor: pointer; transition: 0.3s; }
+        
         .sticker { position: fixed; top: -50px; z-index: 5; pointer-events: none; animation: fall 7s linear infinite; }
         @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
+
+        #gallery-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center; }
+        #gallery-modal img { max-width: 90%; max-height: 90%; border: 3px solid #f9d74c; border-radius: 10px; }
 
         @media (max-width: 700px) { .resim-alani { grid-template-columns: 1fr; } }
     </style>
@@ -83,281 +77,74 @@
         </div>
     </div>
 
-    <nav id="navbar">
-        <span onclick="tabDegistir('mektup', this)" class="active">Ana Sayfa</span>
-        <span onclick="tabDegistir('galeri', this)">Galeri</span>
-    </nav>
+    <div style="display:none">
+        <iframe width="0" height="0" id="audio-player" src="https://www.youtube.com/embed/OfqV-XnYUBA?enablejsapi=1" frameborder="0"></iframe>
+    </div>
 
     <div id="main-content">
-        <div id="mektup" class="tab-content active">
-            <div class="mektup-kagit">
-                <h1>Gökyüzündeki En Parlak Yıldızıma... 🌟</h1>
-                <div class="mesaj">
-                    <p>Bugün takvimler <strong>1 Nisan</strong>'ı gösteriyor ve dünya seninle ilk kez aydınlanıyor. İnsanlar gökyüzüne bakıp en parlak yıldızı ararlar ya hani; ben o yıldızı senin gözlerinde buldum. 2010'un o bahar gününde doğan o ışık, bugün benim tüm yolumu aydınlatan kutup yıldızım oldu.</p>
-                    <p>Biliyorsun, gökyüzünde milyarlarca yıldız var ama her denizcinin güvendiği, yönünü bulduğu tek bir yıldız vardır. Sen benim fırtınalı günlerimde sığındığım limanım, karanlık gecelerimde yolumu gösteren o eşsiz parıltısın. Seninle geçen her an, sanki samanyolunda el ele yürüyor gibi hissettiriyor bana.</p>
-                    <p>Aşkımız, yıldızların o milyonlarca yıllık sadakati gibi mühürlendi kalbime. Sen benim bu hayattaki <strong>'en değerlim'</strong>, gökyüzünden ömrüme düşen en güzel mucizesin. Yeni yaşında dilerim ki, kalbin de o yıldızlar kadar parlak ve huzurlu kalsın. Ben her zaman, o sonsuz boşlukta senin elini tutuyor olacağım.</p>
-                    <p>İyi ki doğdun, iyi ki benim gökyüzüme kondun. Nice ışıl ışıl, huzur dolu yıllarımıza...</p>
-                    <p style="text-align: center; font-size: 1.6rem; margin-top: 30px;">Seni Çok Seviyorum! 🦇 💙 🌷</p>
-                </div>
+        <div class="mektup-kagit">
+            <h1>İyi Ki Doğdun Koca Bebeğim 💙</h1>
+            <div class="mesaj">
+                <p>Bak sevgilim, tam <strong>1 Nisan</strong> günü sen dünyaya gözlerini açtığında, evren senin için o muazzam tabloyu çoktan çizmişti... O gün gökyüzünde parlayan yıldızlar, yıllar sonra hayatımın en parlak ışığı olacağının habercisi gibiydi. Seninle geçen her an, benim için o sonsuz evrenin içinde kaybolmak ama her seferinde yolumu senin kalbinde bulmak gibi.</p>
+                <p>Geleceğe baktığımda sadece bizi görüyorum; el ele yürüdüğümüz yolları, birlikte kuracağımız o sıcacık yuvayı ve Batman gibi her zorluğa karşı birbirimizin kahramanı olduğumuz o güzel günleri... Senin gülüşün benim sığınağım, varlığın ise en büyük şükür sebebim. İyi ki doğdun sevgilim!</p>
+                <p style="text-align: center; font-size: 1.5rem; margin-top: 30px;">Seni Çok Seviyorum! 🦇 💙 🌷</p>
+            </div>
+
+            <div class="resim-alani">
+                <div class="foto-kart"><img src="IMG_0279.JPG"><p>Koca bebeğim...</p></div>
+                <div class="foto-kart"><img src="IMG-20260313-WA0061.jpg"><p>En güzel anımız.</p></div>
+                <div class="foto-kart"><img src="IMG_1333.JPG"><p>Huzur...</p></div>
+                <div class="foto-kart"><img src="IMG_0669 2.JPG"><p>Gülüşün her şeye değer!</p></div>
+            </div>
+
+            <div class="bottom-area">
+                <p style="margin-bottom: 15px;">Doğduğun gün evrenin sana hediyesini görmek ister miin?</p>
+                <button class="gallery-btn" onclick="openGallery()">Evreni Gör ✨</button>
             </div>
         </div>
+    </div>
 
-        <div id="galeri" class="tab-content">
-            <div class="mektup-kagit">
-                <h1>Bizim Anılarımız & Gökyüzü 📸✨</h1>
-                
-                <div style="text-align:center; margin-bottom:40px;">
-                    <p style="font-size:1.3rem; margin-bottom:10px;">Doğduğun gün evrenin sana hediyesi...</p>
-                    <div class="foto-kart" style="max-width: 600px; margin: 0 auto;">
-                        <img src="dogumgunu_uzay.png" alt="1 Nisan Gökyüzü">
-                        <p>1 Nisan'da çekilen bu büyüleyici gökyüzü, sanki senin doğuşunu müjdeliyor... 🌌</p>
-                    </div>
-                </div>
-
-                <div class="resim-alani">
-                    <div class="foto-kart"><img src="IMG_0279.JPG"><p>Koca bebeğim...</p></div>
-                    <div class="foto-kart"><img src="IMG-20260313-WA0061.jpg"><p>En güzel anımız.</p></div>
-                    <div class="foto-kart"><img src="IMG_1333.JPG"><p>Huzur...</p></div>
-                    <div class="foto-kart"><img src="IMG_0669 2.JPG"><p>Gülüşün her şeye değer!</p></div>
-                </div>
-                
-                <div style="text-align:center; margin-top:30px;">
-                    <button onclick="window.open('april-1-2019-eagle-nebula-pillars.jpg', '_blank')" style="background:none; color:#f9d74c; border:1px solid #f9d74c; padding:10px 20px; border-radius:20px; cursor:pointer;">Başka Bir Evreni Gör ✨</button>
-                </div>
-            </div>
-        </div>
+    <div id="gallery-modal" onclick="this.style.display='none'">
+        <img src="april-1-2019-eagle-nebula-pillars.jpg">
     </div>
 
     <script>
         function süsOlustur() {
             const screen = document.getElementById('login-screen');
-            const items = ['💙', '🎈', '✨', '🎁'];
-            for(let i=0; i<40; i++) {
+            const items = ['💙', '🎈', '✨', '🎁', '💙'];
+            for(let i=0; i<45; i++) {
                 let div = document.createElement('div');
                 div.className = 'bg-heart';
                 div.innerText = items[Math.floor(Math.random()*items.length)];
                 div.style.left = Math.random() * 100 + 'vw';
-                div.style.position = 'absolute';
-                div.style.animation = `float ${Math.random()*5 + 5}s infinite linear`;
+                div.style.animationDelay = Math.random() * 8 + 's';
+                div.style.fontSize = Math.random() * 15 + 15 + 'px';
                 screen.appendChild(div);
             }
         }
 
         function ac() {
             let sifre = document.getElementById('pass').value.trim().toLowerCase();
-            if(sifre === "en değerlim") {
+            // Güncellenen Şifre
+            if(sifre === "seni çok seviyorum en değerlim") {
                 document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('navbar').style.display = 'flex';
                 document.getElementById('main-content').style.display = 'block';
+                
+                // Müzik Başlatma
+                let player = document.getElementById('audio-player');
+                player.src += "&autoplay=1";
+                
                 startStickers();
             } else {
                 alert("Şifre yanlış koca bebeğim! 🦇");
             }
         }
 
-        function tabDegistir(tabId, element) {
-            // Tüm içerikleri gizle
-            const contents = document.getElementsByClassName('tab-content');
-            for(let content of contents) { content.classList.remove('active'); }
-            
-            // Seçilen içeriği göster
-            document.getElementById(tabId).classList.add('active');
-
-            // Sekme linklerini güncelle
-            const tabs = document.querySelectorAll('nav span');
-            tabs.forEach(t => t.classList.remove('active'));
-            element.classList.add('active');
-        }
+        function openGallery() { document.getElementById('gallery-modal').style.display = 'flex'; }
 
         function startStickers() {
-            const icons = ['🦇', '💙', '🌷', '✨', '⭐'];
-            for(let i=0; i<50; i++) {
-                setTimeout(() => {
-                    let s = document.createElement('div');
-                    s.className = 'sticker';
-                    s.innerText = icons[Math.floor(Math.random()*icons.length)];
-                    s.style.left = Math.random() * 100 + 'vw';
-                    document.body.appendChild(s);
-                }, i * 200);
-            }
-        }
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sana Özel Sürpriz 💙</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
-    <style>
-        body { margin: 0; padding: 0; font-family: 'Cormorant Garamond', serif; background-color: #001a33; overflow-x: hidden; color: #f9d74c; }
-
-        /* --- ŞİFRE EKRANI --- */
-        #login-screen {
-            position: fixed; width: 100%; height: 100%; 
-            background: radial-gradient(circle at center, #002d5a 0%, #001122 100%);
-            display: flex; justify-content: center; align-items: center; z-index: 9999;
-        }
-        #login-box {
-            background: rgba(0, 26, 51, 0.95); padding: 50px; border-radius: 25px;
-            border: 2px solid #f9d74c; text-align: center;
-            box-shadow: 0 0 30px rgba(249, 215, 76, 0.4);
-            backdrop-filter: blur(10px);
-        }
-        input { padding: 15px; width: 280px; border: 1px solid #f9d74c; background: rgba(255,255,255,0.05); color: #fff; border-radius: 50px; text-align: center; outline: none; }
-        button { margin-top: 20px; padding: 12px 40px; background: #f9d74c; color: #001a33; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-
-        /* --- NAVİGASYON (SEKMELER) --- */
-        nav {
-            display: none; /* Giriş yapana kadar gizli */
-            justify-content: center;
-            background: rgba(0, 20, 40, 0.9);
-            padding: 15px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #f9d74c;
-        }
-        nav span {
-            margin: 0 20px;
-            font-size: 1.4rem;
-            cursor: pointer;
-            transition: 0.3s;
-            opacity: 0.7;
-        }
-        nav span:hover, nav span.active {
-            opacity: 1;
-            text-shadow: 0 0 10px #f9d74c;
-            border-bottom: 2px solid #f9d74c;
-        }
-
-        /* --- İÇERİK ALANLARI --- */
-        #main-content { display: none; padding: 20px; max-width: 900px; margin: 20px auto; }
-        .tab-content { display: none; animation: fadeIn 1s forwards; }
-        .tab-content.active { display: block; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .mektup-kagit { background: #002d5a; padding: 40px; border-radius: 15px; border: 1px solid #f9d74c; box-shadow: 0 0 40px rgba(0,0,0,0.5); }
-        h1 { font-size: 2.6rem; text-align: center; border-bottom: 1px solid #f9d74c; padding-bottom: 15px; }
-        .mesaj { line-height: 1.8; font-size: 1.35rem; text-align: justify; }
-
-        /* GALERİ TASARIMI */
-        .resim-alani { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; }
-        .foto-kart { background: #001a33; padding: 10px; border-radius: 10px; border: 1px solid rgba(249, 215, 76, 0.3); text-align: center; }
-        .foto-kart img { width: 100%; border-radius: 8px; display: block; transition: 0.5s; cursor: pointer; }
-        .foto-kart img:hover { transform: scale(1.05); }
-        .foto-kart p { font-size: 1.1rem; color: #88aacc; margin-top: 10px; font-style: italic; }
-
-        .sticker { position: fixed; top: -50px; z-index: 5; pointer-events: none; animation: fall 7s linear infinite; }
-        @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
-
-        @media (max-width: 700px) { .resim-alani { grid-template-columns: 1fr; } }
-    </style>
-</head>
-<body onload="süsOlustur()">
-
-    <div id="login-screen">
-        <div id="login-box">
-            <h2>Sana Özel Bir Sürpriz ✨</h2>
-            <p>Mavi dünyana giriş yapmak için şifreyi gir...</p>
-            <input type="text" id="pass" placeholder="Şifreniz...">
-            <br>
-            <button onclick="ac()">Mektubu Oku 💙</button>
-        </div>
-    </div>
-
-    <nav id="navbar">
-        <span onclick="tabDegistir('mektup', this)" class="active">Ana Sayfa</span>
-        <span onclick="tabDegistir('galeri', this)">Galeri</span>
-    </nav>
-
-    <div id="main-content">
-        <div id="mektup" class="tab-content active">
-            <div class="mektup-kagit">
-                <h1>Gökyüzündeki En Parlak Yıldızıma... 🌟</h1>
-                <div class="mesaj">
-                    <p>Bugün takvimler <strong>1 Nisan</strong>'ı gösteriyor ve dünya seninle ilk kez aydınlanıyor. İnsanlar gökyüzüne bakıp en parlak yıldızı ararlar ya hani; ben o yıldızı senin gözlerinde buldum. 2010'un o bahar gününde doğan o ışık, bugün benim tüm yolumu aydınlatan kutup yıldızım oldu.</p>
-                    <p>Biliyorsun, gökyüzünde milyarlarca yıldız var ama her denizcinin güvendiği, yönünü bulduğu tek bir yıldız vardır. Sen benim fırtınalı günlerimde sığındığım limanım, karanlık gecelerimde yolumu gösteren o eşsiz parıltısın. Seninle geçen her an, sanki samanyolunda el ele yürüyor gibi hissettiriyor bana.</p>
-                    <p>Aşkımız, yıldızların o milyonlarca yıllık sadakati gibi mühürlendi kalbime. Sen benim bu hayattaki <strong>'en değerlim'</strong>, gökyüzünden ömrüme düşen en güzel mucizesin. Yeni yaşında dilerim ki, kalbin de o yıldızlar kadar parlak ve huzurlu kalsın. Ben her zaman, o sonsuz boşlukta senin elini tutuyor olacağım.</p>
-                    <p>İyi ki doğdun, iyi ki benim gökyüzüme kondun. Nice ışıl ışıl, huzur dolu yıllarımıza...</p>
-                    <p style="text-align: center; font-size: 1.6rem; margin-top: 30px;">Seni Çok Seviyorum! 🦇 💙 🌷</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="galeri" class="tab-content">
-            <div class="mektup-kagit">
-                <h1>Bizim Anılarımız & Gökyüzü 📸✨</h1>
-                
-                <div style="text-align:center; margin-bottom:40px;">
-                    <p style="font-size:1.3rem; margin-bottom:10px;">Doğduğun gün evrenin sana hediyesi...</p>
-                    <div class="foto-kart" style="max-width: 600px; margin: 0 auto;">
-                        <img src="dogumgunu_uzay.png" alt="1 Nisan Gökyüzü">
-                        <p>1 Nisan'da çekilen bu büyüleyici gökyüzü, sanki senin doğuşunu müjdeliyor... 🌌</p>
-                    </div>
-                </div>
-
-                <div class="resim-alani">
-                    <div class="foto-kart"><img src="IMG_0279.JPG"><p>Koca bebeğim...</p></div>
-                    <div class="foto-kart"><img src="IMG-20260313-WA0061.jpg"><p>En güzel anımız.</p></div>
-                    <div class="foto-kart"><img src="IMG_1333.JPG"><p>Huzur...</p></div>
-                    <div class="foto-kart"><img src="IMG_0669 2.JPG"><p>Gülüşün her şeye değer!</p></div>
-                </div>
-                
-                <div style="text-align:center; margin-top:30px;">
-                    <button onclick="window.open('april-1-2019-eagle-nebula-pillars.jpg', '_blank')" style="background:none; color:#f9d74c; border:1px solid #f9d74c; padding:10px 20px; border-radius:20px; cursor:pointer;">Başka Bir Evreni Gör ✨</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function süsOlustur() {
-            const screen = document.getElementById('login-screen');
-            const items = ['💙', '🎈', '✨', '🎁'];
-            for(let i=0; i<40; i++) {
-                let div = document.createElement('div');
-                div.className = 'bg-heart';
-                div.innerText = items[Math.floor(Math.random()*items.length)];
-                div.style.left = Math.random() * 100 + 'vw';
-                div.style.position = 'absolute';
-                div.style.animation = `float ${Math.random()*5 + 5}s infinite linear`;
-                screen.appendChild(div);
-            }
-        }
-
-        function ac() {
-            let sifre = document.getElementById('pass').value.trim().toLowerCase();
-            if(sifre === "en değerlim") {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('navbar').style.display = 'flex';
-                document.getElementById('main-content').style.display = 'block';
-                startStickers();
-            } else {
-                alert("Şifre yanlış koca bebeğim! 🦇");
-            }
-        }
-
-        function tabDegistir(tabId, element) {
-            // Tüm içerikleri gizle
-            const contents = document.getElementsByClassName('tab-content');
-            for(let content of contents) { content.classList.remove('active'); }
-            
-            // Seçilen içeriği göster
-            document.getElementById(tabId).classList.add('active');
-
-            // Sekme linklerini güncelle
-            const tabs = document.querySelectorAll('nav span');
-            tabs.forEach(t => t.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        function startStickers() {
-            const icons = ['🦇', '💙', '🌷', '✨', '⭐'];
-            for(let i=0; i<50; i++) {
+            const icons = ['🦇', '💙', '🌷', '✨', '❤️'];
+            for(let i=0; i<60; i++) {
                 setTimeout(() => {
                     let s = document.createElement('div');
                     s.className = 'sticker';
