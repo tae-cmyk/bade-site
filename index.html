@@ -1,4 +1,4 @@
-            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -18,10 +18,10 @@
             background: rgba(0, 26, 51, 0.95); padding: 50px; border-radius: 25px;
             border: 2px solid #f9d74c; text-align: center;
             box-shadow: 0 0 30px rgba(249, 215, 76, 0.4);
-            backdrop-filter: blur(10px); z-index: 10;
+            backdrop-filter: blur(10px);
         }
         input { 
-            padding: 15px; width: 280px; border: 1px solid #f9d74c; 
+            padding: 15px; width: 320px; border: 1px solid #f9d74c; 
             background: rgba(255,255,255,0.05); color: #fff; border-radius: 50px;
             text-align: center; font-size: 1.1rem; outline: none; transition: 0.3s;
         }
@@ -30,6 +30,7 @@
             color: #001a33; border: none; border-radius: 50px;
             font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.3s;
         }
+        
         .bg-heart { position: absolute; color: rgba(0, 150, 255, 0.4); pointer-events: none; animation: float 8s infinite linear; }
         @keyframes float {
             0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
@@ -124,13 +125,16 @@
         }
 
         function ac() {
-            let sifre = document.getElementById('pass').value.trim().toLowerCase();
-            // Güncellenen Şifre
-            if(sifre === "seni çok seviyorum en değerlim") {
+            // Girilen metni al, sağ-sol boşlukları sil ve küçük harfe çevir
+            let inputVal = document.getElementById('pass').value.trim().toLowerCase();
+            
+            // Beklenen şifre (küçük harf haliyle karşılaştırıyoruz)
+            let dogruSifre = "seni çok seviyorum en değerlim";
+
+            if(inputVal === dogruSifre) {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
                 
-                // Müzik Başlatma
                 let player = document.getElementById('audio-player');
                 player.src += "&autoplay=1";
                 
@@ -157,3 +161,4 @@
     </script>
 </body>
 </html>
+
