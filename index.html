@@ -3,198 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonsuz Emanetim 💙</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <title>Sana Özel Sürpriz 💙</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --dark-bg: #020617;
-            --neon-blue: #38bdf8;
-            --deep-blue: #1e3a8a;
+        body { margin: 0; padding: 0; font-family: 'Cormorant Garamond', serif; background-color: #001a33; overflow-x: hidden; color: #f9d74c; }
+
+        /* --- ZENGİN ŞİFRE EKRANI --- */
+        #login-screen {
+            position: fixed; width: 100%; height: 100%; 
+            background: radial-gradient(circle at center, #002d5a 0%, #001122 100%);
+            display: flex; justify-content: center; align-items: center; z-index: 9999;
+        }
+        #login-box {
+            background: rgba(0, 26, 51, 0.95); padding: 50px; border-radius: 25px;
+            border: 2px solid #f9d74c; text-align: center;
+            box-shadow: 0 0 30px rgba(249, 215, 76, 0.4);
+            backdrop-filter: blur(10px); z-index: 10;
+        }
+        #login-box h2 { font-size: 2.2rem; margin-bottom: 20px; text-shadow: 0 0 10px #f9d74c; }
+        input { 
+            padding: 15px; width: 280px; border: 1px solid #f9d74c; 
+            background: rgba(255,255,255,0.05); color: #fff; border-radius: 50px;
+            text-align: center; font-size: 1.1rem; outline: none; transition: 0.3s;
+        }
+        input:focus { box-shadow: 0 0 15px #f9d74c; }
+        button { 
+            margin-top: 20px; padding: 12px 40px; background: #f9d74c; 
+            color: #001a33; border: none; border-radius: 50px;
+            font-weight: bold; font-size: 1.2rem; cursor: pointer; transition: 0.3s;
+        }
+        button:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(249, 215, 76, 0.5); }
+
+        .bg-heart { position: absolute; color: rgba(0, 150, 255, 0.4); pointer-events: none; animation: float 8s infinite linear; }
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        body {
-            margin: 0;
-            height: 100vh;
-            background-color: var(--dark-bg);
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            color: white;
+        /* --- ANA MEKTUP --- */
+        #main-content { display: none; padding: 20px; max-width: 900px; margin: 40px auto; animation: fadeIn 2s forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .mektup-kagit { 
+            background: #002d5a; padding: 40px; border-radius: 15px; 
+            border: 1px solid #f9d74c; box-shadow: 0 0 40px rgba(0,0,0,0.5);
         }
+        h1 { font-size: 2.6rem; text-align: center; margin-bottom: 25px; border-bottom: 1px solid #f9d74c; padding-bottom: 15px; }
+        .mesaj { line-height: 1.8; font-size: 1.35rem; text-align: justify; margin-bottom: 40px; }
 
-        /* Arka Plan Görseli */
-        .bg-image {
-            position: absolute;
-            inset: 0;
-            background-image: url('https://images.alphacoders.com/598/598634.jpg');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.25;
-            z-index: 1;
-        }
+        /* 2x2 Fotoğraf Izgarası */
+        .resim-alani { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .foto-kart { background: #001a33; padding: 10px; border-radius: 10px; border: 1px solid rgba(249, 215, 76, 0.3); text-align: center; }
+        .foto-kart img { width: 100%; border-radius: 8px; display: block; }
+        .foto-kart p { font-size: 1rem; color: #88aacc; margin-top: 10px; font-style: italic; }
 
-        .overlay {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle, rgba(30, 58, 138, 0.2), rgba(2, 6, 23, 0.95));
-            z-index: 2;
-        }
+        /* Galeri Butonu Alanı */
+        .bottom-area { text-align: center; border-top: 1px solid #f9d74c; margin-top: 30px; padding-top: 25px; }
+        .gallery-btn { background: none; color: #f9d74c; border: 1px solid #f9d74c; padding: 10px 25px; border-radius: 30px; cursor: pointer; font-size: 1.1rem; transition: 0.3s; }
+        .gallery-btn:hover { background: #f9d74c; color: #001a33; }
 
-        /* Batman Logoları */
-        .bat-icon {
-            position: absolute;
-            width: 120px;
-            opacity: 0.15;
-            z-index: 3;
-            filter: drop-shadow(0 0 15px var(--neon-blue));
-        }
-        .left { left: 5%; bottom: 10%; transform: rotate(-10deg); }
-        .right { right: 5%; bottom: 10%; transform: rotate(10deg); }
+        .sticker { position: fixed; top: -50px; z-index: 5; pointer-events: none; animation: fall 7s linear infinite; }
+        @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
 
-        /* Ana Kart */
-        .main-card {
-            position: relative;
-            z-index: 10;
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(20px);
-            padding: 35px;
-            border-radius: 40px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
-            text-align: center;
-            max-width: 550px;
-            width: 85%;
-        }
+        #gallery-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center; }
+        #gallery-modal img { max-width: 90%; max-height: 90%; border: 3px solid #f9d74c; border-radius: 10px; }
 
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem;
-            color: var(--neon-blue);
-            margin-bottom: 15px;
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
-        }
-
-        .text-content {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            max-height: 320px;
-            overflow-y: auto;
-            padding: 0 15px;
-            font-weight: 300;
-        }
-
-        .text-content b { color: var(--neon-blue); }
-
-        /* Mavi Yüzebilir Kalpler Efekti */
-        .blue-heart {
-            position: absolute;
-            bottom: -50px;
-            color: var(--neon-blue);
-            font-size: 20px;
-            user-select: none;
-            pointer-events: none;
-            z-index: 5;
-            animation: swimUp linear infinite;
-            filter: drop-shadow(0 0 5px var(--neon-blue));
-            opacity: 0.7;
-        }
-
-        @keyframes swimUp {
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            50% { transform: translateY(-50vh) translateX(25px) rotate(180deg); }
-            100% { transform: translateY(-110vh) translateX(-25px) rotate(360deg); opacity: 0; }
-        }
-
-        /* Geri Sayım Kutusu */
-        .countdown-box {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            background: rgba(56, 189, 248, 0.1);
-            padding: 15px;
-            border-radius: 20px;
-        }
-
-        .count-item span {
-            display: block;
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: var(--neon-blue);
-        }
-
-        .count-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Kaydırma çubuğu */
-        .text-content::-webkit-scrollbar { width: 4px; }
-        .text-content::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 10px; }
+        @media (max-width: 700px) { .resim-alani { grid-template-columns: 1fr; } }
     </style>
 </head>
-<body>
+<body onload="süsOlustur()">
 
-    <div class="bg-image"></div>
-    <div class="overlay"></div>
+    <div id="flyers-container"></div>
 
-    <img src="https://www.pngall.com/wp-content/uploads/13/Batman-Logo-PNG-Pic.png" class="bat-icon left">
-    <img src="https://www.pngall.com/wp-content/uploads/13/Batman-Logo-PNG-Pic.png" class="bat-icon right">
-
-    <iframe src="https://www.youtube.com/embed/Z0oF8QeX2jQ?autoplay=1&loop=1&playlist=Z0oF8QeX2jQ" allow="autoplay" style="display:none"></iframe>
-
-    <div class="main-card">
-        <h1>Yeni Yılımız Kutlu Olsun 💙</h1>
-        
-        <div class="text-content">
-            Yeni bir yıla giriyoruz ve aklımda tek bir şey var o da sensin bebeğimmm aşkımmm balımmm karımmm birtanemmmm çiçeğimmm... <br><br>
-            Bu yıl bana ne yaşattıysa hepsini seninle yaşadım. Bazen güldük bazen sustuk bazen yorulduk ama ben hiçbir zaman senden vazgeçmedim. Çünkü sen benim için geçici bir mutluluk değil kalıcı bir his oldun. <br><br>
-            Canım yandığında bile seni sevdim, kafam karıştığında bile sana güvendim, herkes giderken bile senin kalacağını bildim. <br><br>
-            Yeni yılda senden mucize istemiyorum; sadece yine yanımda ol, yine bana bak, yine ben olayım sen ol. <br><br>
-            <b>Kalbim sana emanet, geleceğim sana emanet, ben sana emanetim.</b><br><br>
-            Mutlu yıllar bebeğimmm, iyi ki varsın iyi ki benimsin...
-        </div>
-
-        <div class="countdown-box">
-            <div class="count-item"><span id="days">00</span><div class="count-label">Gün</div></div>
-            <div class="count-item"><span id="hours">00</span><div class="count-label">Saat</div></div>
-            <div class="count-item"><span id="mins">00</span><div class="count-label">Dakika</div></div>
-            <div class="count-item"><span id="secs">00</span><div class="count-label">Saniye</div></div>
+    <div id="login-screen">
+        <div id="login-box">
+            <h2>Sana Özel Bir Sürpriz ✨</h2>
+            <p>Mavi dünyana giriş yapmak için şifreyi gir...</p>
+            <input type="text" id="pass" placeholder="Şifreniz...">
+            <br>
+            <button onclick="ac()">Mektubu Oku 💙</button>
         </div>
     </div>
 
+    <div style="display:none">
+        <iframe width="0" height="0" id="audio-player" src="https://www.youtube.com/embed/OfqV-XnYUBA?enablejsapi=1" frameborder="0"></iframe>
+    </div>
+
+    <div id="main-content">
+        <div class="mektup-kagit">
+            <h1>Gökyüzündeki En Parlak Yıldızıma... 🌟</h1>
+            <div class="mesaj">
+                <p>Bugün takvimler <strong>1 Nisan</strong>'ı gösteriyor ve dünya seninle ilk kez aydınlanıyor. İnsanlar gökyüzüne bakıp en parlak yıldızı ararlar ya hani; ben o yıldızı senin gözlerinde buldum. 2010'un o bahar gününde doğan o ışık, bugün benim tüm yolumu aydınlatan kutup yıldızım oldu.</p>
+                
+                <p>Biliyorsun, gökyüzünde milyarlarca yıldız var ama her denizcinin güvendiği, yönünü bulduğu tek bir yıldız vardır. Sen benim fırtınalı günlerimde sığındığım limanım, karanlık gecelerimde yolumu gösteren o eşsiz parıltısın. Seninle geçen her an, sanki samanyolunda el ele yürüyor gibi hissettiriyor bana.</p>
+                
+                <p>Aşkımız, yıldızların o milyonlarca yıllık sadakati gibi mühürlendi kalbime. Sen benim bu hayattaki <strong>'en değerlim'</strong>, gökyüzünden ömrüme düşen en güzel mucizesin. Yeni yaşında dilerim ki, kalbin de o yıldızlar kadar parlak ve huzurlu kalsın. Ben her zaman, o sonsuz boşlukta senin elini tutuyor olacağım.</p>
+                
+                <p>İyi ki doğdun, iyi ki benim gökyüzüme kondun. Nice ışıl ışıl, huzur dolu yıllarımıza...</p>
+                
+                <p style="text-align: center; font-size: 1.5rem; margin-top: 30px;">Seni, yıldızların sayamayacağımız kadar çokluğuyla seviyorum. 🦇 💙 🌷</p>
+            </div>
+
+            <div class="resim-alani">
+                <div class="foto-kart"><img src="IMG_0279.JPG"><p>Koca bebeğim...</p></div>
+                <div class="foto-kart"><img src="IMG-20260313-WA0061.jpg"><p>En güzel anımız.</p></div>
+                <div class="foto-kart"><img src="IMG_1333.JPG"><p>Huzur...</p></div>
+                <div class="foto-kart"><img src="IMG_0669 2.JPG"><p>Gülüşün her şeye değer!</p></div>
+            </div>
+
+            <div class="bottom-area">
+                <p style="margin-bottom: 15px;">Doğduğun gün evrenin sana hediyesini görmek ister misin?</p>
+                <button class="gallery-btn" onclick="openGallery()">Evreni Gör ✨</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="gallery-modal" onclick="this.style.display='none'">
+        <img src="april-1-2019-eagle-nebula-pillars.jpg">
+    </div>
+
     <script>
-        // Yüzen Mavi Kalpler Fonksiyonu
-        function createSwimmingHeart() {
-            const heart = document.createElement("div");
-            heart.className = "blue-heart";
-            heart.innerHTML = "💙";
-            
-            // Rastgele yatay pozisyon ve hız
-            heart.style.left = Math.random() * 100 + "vw";
-            const duration = Math.random() * 5 + 7; // 7-12 saniye arası yüzme süresi
-            heart.style.animationDuration = duration + "s";
-            heart.style.fontSize = (Math.random() * 15 + 10) + "px"; // Farklı boyutlar
-            
-            document.body.appendChild(heart);
-            
-            // Animasyon bitince temizle
-            setTimeout(() => { heart.remove(); }, duration * 1000);
+        function süsOlustur() {
+            const screen = document.getElementById('login-screen');
+            const items = ['💙', '🎈', '✨', '🎁', '💙'];
+            for(let i=0; i<45; i++) {
+                let div = document.createElement('div');
+                div.className = 'bg-heart';
+                div.innerText = items[Math.floor(Math.random()*items.length)];
+                div.style.left = Math.random() * 100 + 'vw';
+                div.style.animationDelay = Math.random() * 8 + 's';
+                div.style.fontSize = Math.random() * 15 + 15 + 'px';
+                screen.appendChild(div);
+            }
         }
 
-        // Sürekli kalp oluştur
-        setInterval(createSwimmingHeart, 300);
+        function ac() {
+            let sifre = document.getElementById('pass').value.trim().toLowerCase();
+            // Şifreyi sadece "en değerlim" yaptım, istersen değiştirebilirsin
+            if(sifre === "en değerlim") {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                let player = document.getElementById('audio-player');
+                player.src += "&autoplay=1";
+                startStickers();
+            } else {
+                alert("Şifre yanlış koca bebeğim! 🦇");
+            }
+        }
 
-        // Geri Sayım
-        const target = new Date("Jan 1, 2026 00:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const d = target - now;
-            document.getElementById("days").innerText = Math.floor(d / (1000 * 60 * 60 * 24));
-            document.getElementById("hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById("mins").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById("secs").innerText = Math.floor((d % (1000 * 60)) / 1000);
-        }, 1000);
+        function openGallery() { document.getElementById('gallery-modal').style.display = 'flex'; }
+
+        function startStickers() {
+            const icons = ['🦇', '💙', '🌷', '✨', '⭐'];
+            for(let i=0; i<60; i++) {
+                setTimeout(() => {
+                    let s = document.createElement('div');
+                    s.className = 'sticker';
+                    s.innerText = icons[Math.floor(Math.random()*icons.length)];
+                    s.style.left = Math.random() * 100 + 'vw';
+                    s.style.fontSize = '25px';
+                    document.body.appendChild(s);
+                }, i * 200);
+            }
+        }
     </script>
 </body>
 </html>
